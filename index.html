@@ -92,6 +92,7 @@
     .btn-next,
     .btn-prev {
       min-width: 120px;
+      text-transform: uppercase;
     }
 
     .btn-next {
@@ -120,6 +121,33 @@
       border-color: rgb(168, 108, 168) !important;
       color: white;
     }
+
+    .btn-prev {
+      color: rgb(168, 108, 168);
+      border: 2px solid rgb(168, 108, 168);
+      background: transparent !important;
+    }
+
+    .btn-prev:hover {
+      color: white;
+      border: 2px solid rgb(168, 108, 168);
+      background: rgb(168, 108, 168);
+    }
+
+
+
+
+
+    .btn-prev,
+    .btn-prev:focus,
+    .btn-prev.active,
+    .btn-prev.show,
+    .btn-check:checked+.btn-prev,
+    .btn-prev:active {
+      color: rgb(168, 108, 168);
+      border: 2px solid rgb(168, 108, 168);
+    }
+
 
     .btn i {
       margin-right: 6px;
@@ -494,9 +522,9 @@
 
                 </div>
 
-                <button type="button" class="btn  previewBtn">
+                <!-- <button type="button" class="btn  previewBtn">
                   Preview Your Messages
-                </button>
+                </button> -->
               </div>
 
             </div>

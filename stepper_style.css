@@ -1,0 +1,26 @@
+ .btn-prev {
+      background-color: rgb(168, 108, 168);
+      border-color: rgb(168, 108, 168);
+    }
+
+    .btn-prev:hover {
+      background-color: rgb(168, 108, 168);
+      border-color: rgb(168, 108, 168);
+    }
+
+    .btn-prev:focus {
+      background-color: rgb(168, 108, 168);
+      border-color: rgb(168, 108, 168);
+    }
+
+    .btn-prev,
+    .btn-prev:hover,
+    .btn-prev:focus,
+    .btn-prev.active,
+    .btn-prev.show,
+    .btn-check:checked+.btn-prev,
+    .btn-prev:active {
+      background-color: rgb(168, 108, 168) !important;
+      border-color: rgb(168, 108, 168) !important;
+      color: white;
+    }
