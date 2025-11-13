@@ -16,41 +16,39 @@
 
   <link rel="stylesheet" href="stepper_style.css">
   <style>
-    
+    .stepper {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 30px;
+      border-bottom: 1px solid #dee2e6;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+    }
 
-.stepper {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 30px;
-  border-bottom: 1px solid #dee2e6;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-}
+    /* Chrome, Edge, Safari */
+    .stepper::-webkit-scrollbar {
+      height: 0;
+    }
 
-/* Chrome, Edge, Safari */
-.stepper::-webkit-scrollbar {
-  height: 0;
-}
+    .stepper::-webkit-scrollbar-track {
+      background: transparent;
+    }
 
-.stepper::-webkit-scrollbar-track {
-  background: transparent;
-}
+    .stepper::-webkit-scrollbar-thumb {
+      background: rgb(175, 174, 175);
+      border-radius: 10px;
+    }
 
-.stepper::-webkit-scrollbar-thumb {
-  background: rgb(175, 174, 175);
-  border-radius: 10px;
-}
+    /* Hide scrollbar arrows (start/end buttons) */
+    .stepper::-webkit-scrollbar-button {
+      display: none;
+      width: 0;
+      height: 0;
+    }
 
-/* Hide scrollbar arrows (start/end buttons) */
-.stepper::-webkit-scrollbar-button {
-  display: none;
-  width: 0;
-  height: 0;
-}
-
-.stepper::-webkit-scrollbar-thumb:hover {
-  background: rgb(145, 144, 145);
-}
+    .stepper::-webkit-scrollbar-thumb:hover {
+      background: rgb(145, 144, 145);
+    }
 
 
 
@@ -237,8 +235,9 @@
       justify-content: center;
       gap: 6px;
     }
-    .termsheading{
-            font-size: 18px;
+
+    .termsheading {
+      font-size: 18px;
     }
 
     .popover {
@@ -495,7 +494,7 @@
 
                 </div>
 
-              
+
               </div>
 
             </div>
