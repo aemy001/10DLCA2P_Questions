@@ -15,7 +15,24 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <link rel="stylesheet" href="stepper_style.css">
+  <style>
+    .popover {
+      max-width: 400px;
+      /* keep it readable */
+      font-size: 0.875rem;
+    }
 
+    .popover-header {
+      color: #000;
+      font-weight: 600;
+      background-color: rgba(186, 255, 255, 0.438);
+    }
+
+    .popover-body {
+      color: #495057;
+      background-color: rgba(186, 255, 255, 0.438);
+    }
+  </style>
 </head>
 
 <body>
@@ -27,13 +44,13 @@
 
       <!-- Stepper Navigation -->
       <div class="stepper mb-4">
-        <div class="step active" data-step="1"><i class="fa-solid fa-list"></i>1. Campaign Details</div>
-        <div class="step" data-step="2"><i class="fa-solid fa-message"></i>2. Sample Messages</div>
-        <div class="step" data-step="3"><i class="fa-solid fa-check-circle"></i>3. End-User Consent</div>
-        <div class="step" data-step="4"><i class="fa-solid fa-check-circle"></i>4. General Information</div>
-        <div class="step" data-step="5"><i class="fa-solid fa-check-circle"></i>5. Business Information</div>
-        <div class="step" data-step="6"><i class="fa-solid fa-check-circle"></i>6. Point Of Contact</div>
-        <div class="step" data-step="7"><i class="fa-solid fa-check-circle"></i>7. Terms & Privacy Policy</div>
+        <div class="step active" data-step="1">1. Campaign Details</div>
+        <div class="step" data-step="2">2. Sample Messages</div>
+        <div class="step" data-step="3">3. End-User Consent</div>
+        <div class="step" data-step="4">4. General Information</div>
+        <div class="step" data-step="5"> 5. Business Information</div>
+        <div class="step" data-step="6"> 6. Point Of Contact</div>
+        <div class="step" data-step="7"> 7. Terms & Privacy Policy</div>
       </div>
 
       <!-- Step 1 -->
@@ -52,6 +69,57 @@
 
         <div class="row">
           <div class="col-md-9">
+            <!-- Brand and Campaign Details Section -->
+            <div class="mb-4 border rounded p-3 bg-light">
+              <label class="fw-semibold mb-2">Brand and Campaign Details</label>
+              <p class="mb-3"><small>The fees associated with registration are displayed below.</small></p>
+
+              <div class="row g-3">
+                <!-- Low Volume Brand Registration -->
+                <div class="col-md-6">
+                  <div class="border rounded p-3 bg-white h-100">
+                    <h6 class="fw-bold mb-2">Low Volume Brand Registration</h6>
+                    <p class="mb-1 fs-5 fw-semibold">$4.00 <small>- One Time</small></p>
+                    <ul class="list-unstyled mt-2 mb-0">
+                      <li class="d-flex align-items-center mb-1">
+                        <i class="fa-solid fa-check text-success me-2"></i>
+                        <span>EIN required for registration</span>
+                      </li>
+                      <li class="d-flex align-items-center">
+                        <i class="fa-solid fa-check text-success me-2"></i>
+                        <span>More than 1 phone number allowed</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- Low Volume Campaign Registration -->
+                <div class="col-md-6">
+                  <div class="border rounded p-3 bg-white h-100">
+                    <h6 class="fw-bold mb-2">Low Volume Campaign Registration</h6>
+                    <p class="mb-1 fs-5 fw-semibold">$15.00 <small>- One Time</small></p>
+                    <ul class="list-unstyled mt-2 mb-0">
+                      <li class="d-flex align-items-center mb-1">
+                        <i class="fa-solid fa-check text-success me-2"></i>
+                        <span>Increased delivery rate</span>
+                      </li>
+                      <li class="d-flex align-items-center">
+                        <i class="fa-solid fa-check text-success me-2"></i>
+                        <span>Send up to 6,000 segments per day</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <p class="mt-3 mb-0">
+                <small class="text-muted">
+                  * These fees are paid directly to the phone companies and exist regardless of the texting platform you
+                  use.<br>
+                  * The phone companies also charge campaign fees up to $12/mo in accordance with TCR rules.
+                </small>
+              </p>
+            </div>
             <div class="mb-3">
               <div class="d-flex justify-content-between align-items-center">
                 <label class="form-label fw-semibold">Campaign Use Case <span class="text-danger astrk">*</span></label>
@@ -211,8 +279,7 @@
           </div>
         </div>
         <div class="d-flex justify-content-end gap-3 align-items-center ">
-          <button type="button" class="btn btn-secondary btn-prev"><i
-              class="fa-solid fa-arrow-left"></i>Previous</button>
+          <button type="button" class="btn btn-secondary btn-prev"><i class="fa-solid fa-arrow-left"></i>Back</button>
           <button type="button" class="btn btn-primary btn-next"><i class="fa-solid fa-arrow-right"></i>Next</button>
         </div>
       </div>
@@ -275,8 +342,7 @@
         </div>
 
         <div class="d-flex justify-content-end gap-3 align-items-center  ">
-          <button type="button" class="btn btn-secondary btn-prev"><i
-              class="fa-solid fa-arrow-left"></i>Previous</button>
+          <button type="button" class="btn btn-secondary btn-prev"><i class="fa-solid fa-arrow-left"></i>Back</button>
           <button type="button" class="btn btn-primary btn-next"><i class="fa-solid fa-arrow-right"></i>Next</button>
         </div>
       </div>
@@ -322,8 +388,7 @@
           </div>
         </div>
         <div class="d-flex justify-content-end gap-3 align-items-center  ">
-          <button type="button" class="btn btn-secondary btn-prev"><i
-              class="fa-solid fa-arrow-left"></i>Previous</button>
+          <button type="button" class="btn btn-secondary btn-prev"><i class="fa-solid fa-arrow-left"></i>Back</button>
           <button type="button" class="btn btn-primary btn-next"><i class="fa-solid fa-arrow-right"></i>Next</button>
         </div>
       </div>
@@ -435,8 +500,7 @@
           </div>
         </div>
         <div class="d-flex justify-content-end gap-3 align-items-center  ">
-          <button type="button" class="btn btn-secondary btn-prev"><i
-              class="fa-solid fa-arrow-left"></i>Previous</button>
+          <button type="button" class="btn btn-secondary btn-prev"><i class="fa-solid fa-arrow-left"></i>Back</button>
           <button type="button" class="btn btn-primary btn-next"><i class="fa-solid fa-arrow-right"></i>Next</button>
         </div>
       </div>
@@ -504,11 +568,84 @@
                 </div>
               </div>
             </div>
+
+
+            <!-- modal questions -->
+            <div class="mb-3">
+              <label class="fw-semibold">Do you send text messages to contacts located in United States? <span
+                  class="text-danger astrk">*</span></label></label>
+              <p><small>If you are based in United States registration is mandatory. If you are located outside of the
+                  United States, but send messages to US numbers you are also required to register.</small></p>
+              <div class="d-flex gap-3 mt-2">
+                <div class="form-check rdo">
+                  <input class="form-check-input" type="radio" name="addRepresentative" id="addYes" value="yes">
+                  <label class="form-check-label" for="addYes">Yes</label>
+                </div>
+
+                <div class="form-check rdo">
+                  <input class="form-check-input" type="radio" name="addRepresentative" id="addNo" value="no" checked>
+                  <label class="form-check-label" for="addNo">No</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="fw-semibold">Does the business you're registering have a tax ID (EIN#)? <span
+                  class="text-danger astrk">*</span></label></label>
+              <p><small>* You can find your EIN number on your IRS forms or previous tax return documents (W2, W9, or
+                  CP575).</small></p>
+              <div class="d-flex gap-3 mt-2">
+                <div class="form-check rdo">
+                  <input class="form-check-input" type="radio" name="addRepresentative" id="addYes" value="yes">
+                  <label class="form-check-label" for="addYes">Yes</label>
+                </div>
+
+                <div class="form-check rdo">
+                  <input class="form-check-input" type="radio" name="addRepresentative" id="addNo" value="no" checked>
+                  <label class="form-check-label" for="addNo">No</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="fw-semibold">On average, do you plan to send more or less than 6,000 messages per day? <span
+                  class="text-danger astrk">*</span></label></label>
+              <div class="d-flex gap-3 mt-2">
+                <div class="form-check rdo">
+                  <input class="form-check-input" type="radio" name="addRepresentative" id="addYes" value="yes">
+                  <label class="form-check-label" for="addYes">More than 6,000/Day</label>
+                </div>
+
+                <div class="form-check rdo">
+                  <input class="form-check-input" type="radio" name="addRepresentative" id="addNo" value="no" checked>
+                  <label class="form-check-label" for="addNo">Less than 6,00/Day</label>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="mb-3">
+              <label class="fw-semibold">On average, do you plan to send more or less than 6,000 messages per day? <span
+                  class="text-danger astrk">*</span></label></label>
+              <div class="d-flex gap-3 mt-2">
+                <div class="form-check rdo">
+                  <input class="form-check-input" type="radio" name="addRepresentative" id="addYes" value="yes">
+                  <label class="form-check-label" for="addYes">More than 6,000/Day</label>
+                </div>
+
+                <div class="form-check rdo">
+                  <input class="form-check-input" type="radio" name="addRepresentative" id="addNo" value="no" checked>
+                  <label class="form-check-label" for="addNo">Less than 6,00/Day</label>
+                </div>
+              </div>
+            </div>
+
+
+
           </div>
         </div>
         <div class="d-flex justify-content-end gap-3 align-items-center  ">
-          <button type="button" class="btn btn-secondary btn-prev"><i
-              class="fa-solid fa-arrow-left"></i>Previous</button>
+          <button type="button" class="btn btn-secondary btn-prev"><i class="fa-solid fa-arrow-left"></i>Back</button>
           <button type="button" class="btn btn-primary btn-next"><i class="fa-solid fa-arrow-right"></i>Next</button>
         </div>
       </div>
@@ -523,65 +660,25 @@
             <button class="exitBtnOutline uppercase">Exit</button>
           </div>
         </div>
-
-        <div class="row">
-          <div class="col-md-9">
-            <div class="mb-3">
-              <label class="form-label fw-semibold">First Name <span class="text-danger astrk">*</span></label>
-              <input class="form-control" name="" placeholder="Enter your First Name" />
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label fw-semibold">Last Name <span class="text-danger astrk">*</span></label>
-              <input class="form-control" name="" placeholder="Enter your Last Name" />
-            </div>
-            <div class="mb-3">
-              <label class="form-label fw-semibold">Business Title <span class="text-danger astrk">*</span></label>
-              <input class="form-control" name="" placeholder="Enter your Business Title" />
-            </div>
-            <div class="mb-3">
-              <label class="form-label fw-semibold">Job Position<span class="text-danger astrk">*</span></label>
-              <select class="form-select" required name="">
-                <option value="Select Your Job Position.">
-                  Select Your Job Position. </option>
-                <option value="">Option 1</option>
-                <option value="">Option 2</option>
-              </select>
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label fw-semibold">What is your Email Address? <span
-                  class="text-danger astrk">*</span></label>
-              <input class="form-control" name="" placeholder="Enter Your Email Address" />
-            </div>
-            <div class="mb-3">
-              <label class="form-label fw-semibold">What is your Phone Number? <span
-                  class="text-danger astrk">*</span></label>
-              <input class="form-control" name="" placeholder="Enter Your Phone Number" />
-            </div>
-
-            <div class="mb-3">
-              <label class="fw-semibold">Do you want to add another authorized representative? <span
-                  class="text-muted">(optional)</span></label>
-              <p><small>We may contact this authorized representative if the first one doesn't respond.</small></p>
-              <div class="d-flex gap-3 mt-2">
-                <div class="form-check rdo">
-                  <input class="form-check-input" type="radio" name="addRepresentative" id="addYes" value="yes">
-                  <label class="form-check-label" for="addYes">Yes</label>
-                </div>
-
-                <div class="form-check rdo">
-                  <input class="form-check-input" type="radio" name="addRepresentative" id="addNo" value="no" checked>
-                  <label class="form-check-label" for="addNo">No</label>
-                </div>
-              </div>
-            </div>
+        <div class="mt-4">
+          <p class="fw-semibold termsheading "> Terms of Services & Privacy Policy</p>
+          <p>We will process data according to the <a href="#" class="text-decoration-none" target="_blank"
+              rel="noopener noreferrer">Twilio Privacy Statement</a></p>
+          <div class="form-check d-flex justify-content-center align-items-center gap-3">
+            <input class="form-check-input" type="checkbox" id="accept">
+            <label class="form-check-label" for="accept">
+              I declare that the information provided is accurate. I acknowledge that Twilio will be processing the
+              information provided for the purpose of identity verification, and that Twilio reserves the right to
+              retain Business Profile information after account closure in the case of a traceback from an authority or
+              equivalent.
+            </label>
           </div>
         </div>
-        <div class="d-flex justify-content-end gap-3 align-items-center  ">
-          <button type="button" class="btn btn-secondary btn-prev"><i
-              class="fa-solid fa-arrow-left"></i>Previous</button>
-          <button type="button" class="btn btn-primary btn-next"><i class="fa-solid fa-arrow-right"></i>Next</button>
+
+        <div class="d-flex justify-content-end gap-3 align-items-center  mt-4">
+          <button type="button" class="btn btn-secondary btn-prev"><i class="fa-solid fa-arrow-left"></i>Back</button>
+          <button type="button" class="btn btn-primary btn-next"> <i class="fa-solid fa-paper-plane me-2"></i>Submit
+            Information</button>
         </div>
       </div>
     </form>
