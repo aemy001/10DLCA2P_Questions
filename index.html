@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>10DLC/A2P Registration Stepper</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    body {
+      background-color: #f9fafb;
+      font-family: "Inter", sans-serif;
+    }
+
+    .stepper {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 30px;
+      border-bottom: 1px solid #dee2e6;
+    }
+
+    .stepper .step {
+      padding: 10px 25px;
+      cursor: pointer;
+      position: relative;
+      font-weight: 500;
+      color: #6c757d;
+      transition: color 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .step.active {
+      color: rgb(168, 108, 168);
+      border-bottom: 3px solid rgb(168, 108, 168);
+    }
+
+    .color-main {
+      color: rgb(168, 108, 168);
+    }
+
+    .step i {
+      font-size: 16px;
+    }
+
+    .step-content {
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    textarea {
+      resize: none;
+    }
+
+    .btn-next,
+    .btn-prev {
+      min-width: 120px;
+    }
+
+    .btn-next {
+      background-color: rgb(168, 108, 168);
+      border-color: rgb(168, 108, 168);
+    }
+
+    .btn-next:hover {
+      background-color: rgb(168, 108, 168);
+      border-color: rgb(168, 108, 168);
+    }
+
+    .btn i {
+      margin-right: 6px;
+    }
+
+    .bg-gray {
+      background-color: #f3f4f5;
+      font-weight: 600;
+    }
+
+    .suggestionBtn {
+      background-color: rgb(82, 133, 82);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: 12px;
+    }
+
+    .border-bottom {
+      border-bottom: 2px solid black;
+      padding-bottom: 10px;
+    }
+
+    .astrk {
+      font-size: 18px;
+    }
+
+    .mainBtnOutline {
+      color: rgb(168, 108, 168);
+      border: 2px solid rgb(168, 108, 168);
+      padding: 6px 16px;
+      background: transparent;
+      border-radius: 6px;
+      text-transform: uppercase;
+      font-size: 12px !important;
+    }
+
+    .mainBtnOutline:hover {
+      border: 2px solid rgb(168, 108, 168);
+      background: rgb(168, 108, 168);
+      color: white;
+    }
+
+    .exitBtnOutline {
+      color: red;
+      border: 2px solid red;
+      padding: 6px 16px;
+      background: transparent;
+      border-radius: 6px;
+      text-transform: uppercase;
+      font-size: 12px !important;
+
+    }
+
+    .exitBtnOutline:hover {
+      border: 2px solid red;
+      background: red;
+      color: white;
+    }
+
+    .previewBtn {
+      text-transform: uppercase;
+      background-color: darkblue;
+      border-color: darkblue;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .previewBtn:hover {
+      background-color: darkblue;
+      border-color: darkblue;
+    }
+
+    .popover {
+      max-width: 400px;
+      /* keep it readable */
+      font-size: 0.875rem;
+    }
+
+    .popover-header {
+      color: #000;
+      font-weight: 600;
+      background-color: rgba(186, 255, 255, 0.438);
+    }
+
+    .popover-body {
+      color: #495057;
+      background-color: rgba(186, 255, 255, 0.438);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container mt-5 mb-5">
+    <h4 class="text-center mb-4 fw-bold">10DLC/A2P Registration Form</h4>
+
+    <!-- Form Wrapper -->
+    <form id="registrationForm" action="#" method="post">
+
+      <!-- Stepper Navigation -->
+      <div class="stepper mb-4">
+        <div class="step active" data-step="1"><i class="fa-solid fa-list"></i>1. Campaign Details</div>
+        <div class="step" data-step="2"><i class="fa-solid fa-message"></i>2. Sample Messages</div>
+        <div class="step" data-step="3"><i class="fa-solid fa-check-circle"></i>3. End-User Consent</div>
+        <div class="step" data-step="4"><i class="fa-solid fa-check-circle"></i>4. General Information</div>
+      </div>
+
+      <!-- Step 1 -->
+      <div id="step-1" class="step-content">
+        <h5 class="fw-semibold  border-bottom"> A2P/10DLC Registration
+          - Campaign Details</h5>
+        <div class="text-danger bg-gray p-2 mt-3"><i class="fa-solid fa-triangle-exclamation"></i> This campaign was
+          rejected
+          upon review</div>
+
+        <div class="mt-2"><strong>Read before answering questions:</strong>
+          <p>Before the phone companies are willing to approve your
+            messaging campaigns they need to review some examples of the types of messages you intend to send. Complete
+            the info below.</p>
+        </div>
+
+        <div class="row">
+          <div class="col-md-9">
+            <div class="mb-3">
+              <div class="d-flex justify-content-between align-items-center">
+                <label class="form-label fw-semibold">Campaign Use Case <span class="text-danger astrk">*</span></label>
+                <a href="#" class="color-main">Learn More</a>
+
+              </div>
+              <select name="campaignUseCase" class="form-select" required>
+                <option selected>Sole Proprietor</option>
+                <option>Marketing</option>
+                <option>Customer Care</option>
+                <option>Notifications</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <div class="d-flex justify-content-between align-items-center">
+                <label class="form-label fw-semibold">Campaign Use Case Description <span
+                    class="text-danger astrk">*</span></label>
+                <button class="suggestionBtn mb-2" disabled>Suggestions</button>
+
+              </div>
+              <textarea
+                placeholder="We use this campaign to reach out to clients that have signed up on our website crownhomesre.com and have opted in to receive a call, text or email. We're reaching out regarding an inquiry of their home's value, only if opted in."
+                name="campaignDescription" class="form-control" rows="8" required></textarea>
+              <small class="text-muted">Min length: 40 characters. Max length: 4096 characters.</small>
+            </div>
+
+
+          </div>
+        </div>
+        <div class="d-flex justify-content-end">
+          <button type="button" class="btn btn-primary btn-next"><i class="fa-solid fa-arrow-right"></i>Next</button>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div id="step-2" class="step-content d-none">
+        <div class="d-flex justify-content-between align-items-center border-bottom">
+          <h5 class="fw-semibold  "> A2P/10DLC Registration - Sample Messages</h5>
+          <div class="d-flex  gap-3 align-items-center">
+            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="popover" data-bs-html="true"
+              data-bs-trigger="hover focus" title="Notes:"
+              data-bs-content='To be in compliance with A2P/10DLC the first message you send a contact must include <strong>sender identification</strong> and <strong>opt-out language</strong>.<br><br>
+<strong>Sender identification</strong> identifies who you are and the name of your company. This will appear at the beginning of your message.<br><br>
+<strong>Opt-out language</strong> is text you add to the end of your message that tells contacts how to unsubscribe from further texts.<br><br>
+<strong>If this is missing your registration will get rejected! To ensure compliance we&#39;ll automatically add these required elements to the sample messages you provide.</strong><br><br>
+**If your messages include an embedded link or phone number be sure to check the appropriate boxes. DO NOT use link shorteners.'>
+              <i class="fa-solid fa-circle-info"></i> Notes
+            </button>
+
+            <button class="mainBtnOutline uppercase">Access Help Guide</button>
+            <button class="exitBtnOutline uppercase">Exit</button>
+          </div>
+        </div>
+        <div class="text-danger bg-gray p-2 mt-3"><i class="fa-solid fa-triangle-exclamation"></i> This campaign was
+          rejected
+          upon review</div>
+
+
+
+
+
+        <div class="mt-4"><strong>Read before answering questions:</strong>
+          <p>Before the phone companies are willing to approve your
+            messaging campaigns they need to review some examples of the types of messages you intend to send. Complete
+            the info below.</p>
+        </div>
+
+        <div class="row">
+          <div class="col-md-9">
+            <div class="mb-4">
+              <div class="d-flex justify-content-between align-items-center">
+                <label class="form-label fw-semibold">Sample message #1: (provide an example below)</label>
+                <button class="suggestionBtn" disabled>Suggestions</button>
+
+              </div>
+
+              <div class="mt-2">
+                <label class="form-label fw-semibold">Sender Identification (this section is pre-populated and will be
+                  added to the beginning of your message):<span class="text-danger astrk">*</span></label>
+                <input placeholder="Hi, This is Kirk from crown homes real estate" class="form-control" name="sample1"
+                  required />
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label fw-semibold">Add your sample message below: <span
+                  class="text-danger astrk">*</span></label>
+
+              <textarea
+                placeholder="We received your inquiry regarding the value of your home. When would be a good time for a quick call?"
+                name="sampleMessage" class="form-control" rows="8" required></textarea>
+              <small class="text-muted">Min length: 20 characters. Max length: 1024 characters.</small>
+            </div>
+            <div class="mb-4">
+              <label class="form-label fw-semibold">Opt-out Language (This section is pre-populated and will be added to
+                the end of your message) <span class="text-danger astrk">*</span></label>
+              <input placeholder="Reply stop to unsubscribe" class="form-control" name="sample1" required />
+            </div>
+            <div class="mb-3">
+              <div class="d-flex justify-content-between align-items-center">
+                <label class="form-label fw-semibold">Sample message #2: (provide an example below)</label>
+                <button class="suggestionBtn" disabled>Suggestions</button>
+
+              </div>
+
+              <div class="mt-2">
+                <label class="form-label fw-semibold">Sender Identification (this section is pre-populated and will be
+                  added to the beginning of your message):<span class="text-danger astrk">*</span></label>
+                <input placeholder="Hi, This is Kirk from crown homes real estate" class="form-control" name="sample1"
+                  required />
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label fw-semibold">Add your sample message below: <span
+                  class="text-danger astrk">*</span></label>
+
+              <textarea placeholder="I'm just texting to confirm for our appointment tomorrow. Does that still work?"
+                name="sampleMessage" class="form-control" rows="8" required></textarea>
+              <small class="text-muted">Min length: 20 characters. Max length: 1024 characters.</small>
+            </div>
+            <div class="mb-4">
+              <label class="form-label fw-semibold">Opt-out Language (This section is pre-populated and will be added to
+                the end of your message) <span class="text-danger astrk">*</span></label>
+              <input placeholder="Reply stop to unsubscribe" class="form-control" name="sample1" required />
+
+              <div class="d-flex justify-content-between align-items-start mt-4">
+                <div class="d-flex flex-column gap-2">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="includeLink">
+                    <label class="form-check-label" for="includeLink">
+                      The message will include an embedded link
+                    </label>
+                  </div>
+
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="includePhone">
+                    <label class="form-check-label" for="includePhone">
+                      The message will include phone numbers
+                    </label>
+                  </div>
+
+                  <small class="text-muted">
+                    <strong><em>*If there’s any chance your messages will include links or phone numbers, we recommend
+                        checking these boxes.</em></strong>
+                  </small>
+
+                </div>
+
+                <button type="button" class="btn btn-primary previewBtn">
+                  Preview Your Messages
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between mt-4">
+          <button type="button" class="btn btn-secondary btn-prev"><i
+              class="fa-solid fa-arrow-left"></i>Previous</button>
+          <button type="button" class="btn btn-primary btn-next"><i class="fa-solid fa-arrow-right"></i>Next</button>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div id="step-3" class="step-content d-none">
+        <h5 class="fw-semibold border-bottom">A2P/10DLC Registration - End-User Consent</h5>
+
+        <!-- Rejected campaign message -->
+        <div class="text-danger bg-gray p-2 mt-3">
+          <i class="fa-solid fa-triangle-exclamation"></i> This campaign was rejected upon review
+        </div>
+
+        <!-- Read before answering -->
+        <div class="mt-3">
+          <strong>Read before answering questions:</strong>
+          <p>Before the phone companies are willing to approve your messaging campaigns they need to review some
+            examples of the types of messages you intend to send. Complete the info below.</p>
+        </div>
+
+        <!-- Did you know tooltip -->
+        <div class="mt-2 mb-3">
+          <span class="fw-semibold" data-bs-toggle="tooltip" data-bs-html="true"
+            title="Most campaigns that fail or are rejected are due to incorrect information being submitted in the 'How do end-users consent to receive messages?' section below.">
+            <i class="fa-solid fa-circle-info text-secondary"></i> Did you know?
+          </span>
+        </div>
+
+        <div class="row">
+          <div class="col-md-9">
+            <div class="mb-3">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <label class="form-label fw-semibold">How do end users consent to receive messages from you? <span
+                    class="text-danger astrk">*</span></label>
+                <button class="suggestionBtn" disabled>Suggestions</button>
+
+              </div>
+              <div class="bg-warning p-3 mb-2 rounded">
+                10DLC regulations require that all contacts opt-in to receive messages from your company. The phone
+                companies are looking to see the exact method you use to obtain this consent. The rules and the language
+                they are looking for are very specific. To make this easier we recommend using our pre-filled answer
+                below. We've also included a link to a pre-built, customized opt-in form for your business.
+                <strong>(Recommended - use our pre-filled answer)</strong>
+              </div>
+              <div class="text-danger fw-semibold  p-2 mb-3">
+                <i class="fa-solid fa-triangle-exclamation"></i> The campaign submission has been reviewed and rejected due to issues verifying the Call to Action (CTA)
+                provided for the campaign. <a class="text-danger" href="#" target="_blank">Learn more <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+              </div>
+
+              <textarea
+                placeholder="Clients have to opt into our lead capture from on https://www.crownhomes.com/ and check a box to confirm receiving a call, text or email. They can easily unsubscribe by replying Stop or saying they want to unsubscribe. We will NOT contact them if they don’t check the box to receive call, text or email communications."
+                name="endUserConsent" class="form-control" rows="6" required></textarea>
+              <small class="text-muted">This field should describe how end users opt-in to the campaign, therefore
+                giving consent to the sender to receive their messages. If multiple opt-in methods are used for the same
+                campain, they must all be listed.</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end">
+          <button type="button" class="btn btn-primary btn-next"><i class="fa-solid fa-arrow-right"></i>Next</button>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div id="step-4" class="step-content d-none">
+        <h5 class="fw-semibold mb-3"><i class="fa-solid fa-magnifying-glass me-2 text-primary"></i>Review & Submit</h5>
+        <p>Review your entered details before submitting your campaign registration.</p>
+
+        <ul class="list-group mb-4">
+          <li class="list-group-item"><strong>Campaign Use Case:</strong> Sole Proprietor</li>
+          <li class="list-group-item"><strong>Description:</strong> Outreach to clients opted in for property inquiry
+            follow-ups.</li>
+          <li class="list-group-item"><strong>Sample Messages:</strong> 3 provided</li>
+        </ul>
+
+        <div class="d-flex justify-content-between">
+          <button type="button" class="btn btn-secondary btn-prev"><i
+              class="fa-solid fa-arrow-left"></i>Previous</button>
+          <button type="submit" class="btn btn-success"><i class="fa-solid fa-paper-plane"></i>Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Stepper JS -->
+  <script>
+    const steps = document.querySelectorAll('.step');
+    const contents = document.querySelectorAll('.step-content');
+    let currentStep = 1;
+
+    function showStep(step) {
+      contents.forEach((content, index) => {
+        content.classList.toggle('d-none', index + 1 !== step);
+      });
+      steps.forEach((s, index) => {
+        s.classList.toggle('active', index + 1 === step);
+      });
+    }
+
+    document.querySelectorAll('.btn-next').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (currentStep < steps.length) {
+          currentStep++;
+          showStep(currentStep);
+        }
+      });
+    });
+
+    document.querySelectorAll('.btn-prev').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (currentStep > 1) {
+          currentStep--;
+          showStep(currentStep);
+        }
+      });
+    });
+
+    steps.forEach(step => {
+      step.addEventListener('click', () => {
+        currentStep = parseInt(step.dataset.step);
+        showStep(currentStep);
+      });
+    });
+
+    // Example form submission handler
+    document.getElementById('registrationForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Form submitted successfully!');
+    });
+    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
+    const popoverList = [...popoverTriggerList].map(popoverTriggerEl =>
+      new bootstrap.Popover(popoverTriggerEl)
+    );
+
+    // Initialize Bootstrap tooltips
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    const tooltipList = [...tooltipTriggerList].map(el => new bootstrap.Tooltip(el));
+
+
+
+  </script>
+</body>
+
+</html>
