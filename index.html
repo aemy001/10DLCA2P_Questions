@@ -15,10 +15,10 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <style>
-    body {
+    /* body {
       background-color: #f9fafb;
       font-family: "Inter", sans-serif;
-    }
+    } */
 
     .stepper {
       display: flex;
@@ -78,6 +78,23 @@
       border-color: rgb(168, 108, 168);
     }
 
+    .btn-next:focus {
+      background-color: rgb(168, 108, 168);
+      border-color: rgb(168, 108, 168);
+    }
+
+    .btn-next,
+    .btn-next:hover,
+    .btn-next:focus,
+    .btn-next.active,
+    .btn-next.show,
+    .btn-check:checked+.btn-next,
+    .btn-next:active {
+      background-color: rgb(168, 108, 168) !important;
+      border-color: rgb(168, 108, 168) !important;
+      color: white;
+    }
+
     .btn i {
       margin-right: 6px;
     }
@@ -95,6 +112,7 @@
       padding: 4px 8px;
       font-size: 12px;
     }
+
 
     .border-bottom {
       border-bottom: 2px solid black;
@@ -143,12 +161,15 @@
       background-color: darkblue;
       border-color: darkblue;
       font-size: 14px;
+      color: white;
+      padding: 8px 12px;
       white-space: nowrap;
     }
 
     .previewBtn:hover {
       background-color: darkblue;
       border-color: darkblue;
+      color: white;
     }
 
     .popover {
@@ -167,6 +188,42 @@
       color: #495057;
       background-color: rgba(186, 255, 255, 0.438);
     }
+
+    input,
+    textarea,
+    select {
+      font-size: 14px !important;
+    }
+
+    .form-check-input:checked {
+      background-color: darkblue !important;
+      border-color: darkblue !important;
+    }
+
+    .form-select:focus {
+      border-color: darkblue !important;
+      outline: 0 !important;
+      box-shadow: 0 0 0 .25rem rgba(13, 110, 253, .25) !important;
+    }
+
+    input:focus {
+      border-color: darkblue !important;
+      outline: 0 !important;
+      box-shadow: 0 0 0 .25rem rgba(13, 110, 253, .25) !important;
+    }
+
+    textarea:focus {
+      border-color: darkblue !important;
+      outline: 0 !important;
+      box-shadow: 0 0 0 .25rem rgba(13, 110, 253, .25) !important;
+    }
+
+    .rdo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
   </style>
 </head>
 
@@ -183,6 +240,8 @@
         <div class="step" data-step="2"><i class="fa-solid fa-message"></i>2. Sample Messages</div>
         <div class="step" data-step="3"><i class="fa-solid fa-check-circle"></i>3. End-User Consent</div>
         <div class="step" data-step="4"><i class="fa-solid fa-check-circle"></i>4. General Information</div>
+        <div class="step" data-step="5"><i class="fa-solid fa-check-circle"></i>5. Business Information</div>
+        <div class="step" data-step="6"><i class="fa-solid fa-check-circle"></i>5. Point Of Contact</div>
       </div>
 
       <!-- Step 1 -->
@@ -351,7 +410,7 @@
 
                 </div>
 
-                <button type="button" class="btn btn-primary previewBtn">
+                <button type="button" class="btn  previewBtn">
                   Preview Your Messages
                 </button>
               </div>
@@ -407,8 +466,10 @@
                 <strong>(Recommended - use our pre-filled answer)</strong>
               </div>
               <div class="text-danger fw-semibold  p-2 mb-3">
-                <i class="fa-solid fa-triangle-exclamation"></i> The campaign submission has been reviewed and rejected due to issues verifying the Call to Action (CTA)
-                provided for the campaign. <a class="text-danger" href="#" target="_blank">Learn more <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                <i class="fa-solid fa-triangle-exclamation"></i> The campaign submission has been reviewed and rejected
+                due to issues verifying the Call to Action (CTA)
+                provided for the campaign. <a class="text-danger" href="#" target="_blank">Learn more <i
+                    class="fa-solid fa-arrow-up-right-from-square"></i></a>
               </div>
 
               <textarea
@@ -421,27 +482,243 @@
           </div>
         </div>
 
-        <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-between mt-4">
+          <button type="button" class="btn btn-secondary btn-prev"><i
+              class="fa-solid fa-arrow-left"></i>Previous</button>
           <button type="button" class="btn btn-primary btn-next"><i class="fa-solid fa-arrow-right"></i>Next</button>
         </div>
       </div>
 
       <!-- Step 4 -->
       <div id="step-4" class="step-content d-none">
-        <h5 class="fw-semibold mb-3"><i class="fa-solid fa-magnifying-glass me-2 text-primary"></i>Review & Submit</h5>
-        <p>Review your entered details before submitting your campaign registration.</p>
+        <h5 class="fw-semibold  border-bottom"> A2P/10DLC Registration
+          - General Information</h5>
 
-        <ul class="list-group mb-4">
-          <li class="list-group-item"><strong>Campaign Use Case:</strong> Sole Proprietor</li>
-          <li class="list-group-item"><strong>Description:</strong> Outreach to clients opted in for property inquiry
-            follow-ups.</li>
-          <li class="list-group-item"><strong>Sample Messages:</strong> 3 provided</li>
-        </ul>
 
-        <div class="d-flex justify-content-between">
+        <div class="mt-4"><strong>Read before answering questions:</strong>
+          <p>When completing this page please reference your official IRS documentation. (EIN documents, W2, W9, or
+            CP575). Answer the questions carefully to ensure the info you provide reviews and long delays in getting
+            your business registered.</p>
+        </div>
+
+        <div class="row">
+          <div class="col-md-9">
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Legal Business Name <span class="text-danger astrk">*</span></label>
+              <input class="form-control" name=""
+                placeholder="Enter your legal business name exactly as it appears on your IRS documents (ex: Joe Marketing Agency LLC rather than Joe Marketing Agency)" />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Street Address <span class="text-danger astrk">*</span></label>
+              <input class="form-control" name=""
+                placeholder="Enter your Business street address here. Must be a valid US address." />
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">City<span class="text-danger astrk">*</span></label>
+              <input class="form-control" name="" placeholder="Enter your City name." />
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">State <span class="text-danger astrk">*</span></label>
+              <input class="form-control" name="" placeholder="Enter your state name." />
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Postal/Zip Code <span class="text-danger astrk">*</span></label>
+              <input class="form-control" name="" placeholder="Enter your postal/zip code." />
+            </div>
+
+          </div>
+        </div>
+        <div class="d-flex justify-content-between mt-4">
           <button type="button" class="btn btn-secondary btn-prev"><i
               class="fa-solid fa-arrow-left"></i>Previous</button>
-          <button type="submit" class="btn btn-success"><i class="fa-solid fa-paper-plane"></i>Submit</button>
+          <button type="button" class="btn btn-primary btn-next"><i class="fa-solid fa-arrow-right"></i>Next</button>
+        </div>
+      </div>
+
+
+      <!-- Step 5 -->
+      <div id="step-5" class="step-content d-none">
+        <h5 class="fw-semibold  border-bottom"> A2P/10DLC Registration
+          - Business Information</h5>
+
+
+        <div class="mt-4"><strong>Read before answering questions:</strong>
+          <p>When completing this page please reference your official IRS documentation. (EIN documents, W2, W9, or
+            CP575). Answer the questions carefully to ensure the info you provide reviews and long delays in getting
+            your business registered.</p>
+        </div>
+
+        <div class="row">
+          <div class="col-md-9">
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Customer Business Profile Type<span
+                  class="text-danger astrk">*</span></label>
+              <select class="form-select" required name="">
+                <option value="Select Your customer business profile type">
+                  Select Your customer business profile type </option>
+                <option value="">Option 1</option>
+                <option value="">Option 2</option>
+              </select>
+            </div>
+
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Business Type<span class="text-danger astrk">*</span></label>
+              <select class="form-select" required name="">
+                <option value="Select an option (reference your IRS documents to confirm the correct option)">
+                  Select an option (reference your IRS documents to confirm the correct option)
+                </option>
+                <option value="">Option 1</option>
+                <option value="">Option 2</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Business Industry<span class="text-danger astrk">*</span></label>
+              <select class="form-select" required name="">
+                <option value="Select Your Industry">
+                  Select Your Industry </option>
+                <option value="">Option 1</option>
+                <option value="">Option 2</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Business Registration Number (EIN#) <span
+                  class="text-danger astrk">*</span></label>
+              <input class="form-control" name=""
+                placeholder="Enter your EIN Number (Must be a 9-digit number ex. 12-3456789. This can be found on W2, W9, or CP575)." />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Business Website (it must be your actual business domain) <span
+                  class="text-danger astrk">*</span></label>
+              <input class="form-control" name=""
+                placeholder="Add your Business website url here (ex. www.businesswebsite.com)." />
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Business Regions of Operations <span
+                  class="text-danger astrk">*</span></label>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="c1">
+                    <label class="form-check-label" for="includePhone">
+                      Africa
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="c1">
+                    <label class="form-check-label" for="c1">
+                      Latin America
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="c1">
+                    <label class="form-check-label" for="c1">
+                      Europe
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="c1">
+                    <label class="form-check-label" for="c1">
+                      Asia
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="c1">
+                    <label class="form-check-label" for="c1">
+                      USA and Canada
+                    </label>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+        <div class="d-flex justify-content-between mt-4">
+          <button type="button" class="btn btn-secondary btn-prev"><i
+              class="fa-solid fa-arrow-left"></i>Previous</button>
+          <button type="button" class="btn btn-primary btn-next"><i class="fa-solid fa-arrow-right"></i>Next</button>
+        </div>
+      </div>
+      <!-- Step 6 -->
+      <div id="step-6" class="step-content d-none">
+        <h5 class="fw-semibold  border-bottom"> A2P/10DLC Registration
+          - Point Of Contact</h5>
+
+
+        <div class="mt-4"><strong>Read before answering questions:</strong>
+          <p>Please complete the information below in case we need to contact you or an authorized representative
+            regarding your registration. We will only contact you if there are any issues.</p>
+        </div>
+
+        <div class="row">
+          <div class="col-md-9">
+            <div class="mb-3">
+              <label class="form-label fw-semibold">First Name <span class="text-danger astrk">*</span></label>
+              <input class="form-control" name="" placeholder="Enter your First Name" />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Last Name <span class="text-danger astrk">*</span></label>
+              <input class="form-control" name="" placeholder="Enter your Last Name" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Business Title <span class="text-danger astrk">*</span></label>
+              <input class="form-control" name="" placeholder="Enter your Business Title" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Job Position<span class="text-danger astrk">*</span></label>
+              <select class="form-select" required name="">
+                <option value="Select Your Job Position.">
+                  Select Your Job Position. </option>
+                <option value="">Option 1</option>
+                <option value="">Option 2</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">What is your Email Address? <span
+                  class="text-danger astrk">*</span></label>
+              <input class="form-control" name="" placeholder="Enter Your Email Address" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">What is your Phone Number? <span
+                  class="text-danger astrk">*</span></label>
+              <input class="form-control" name="" placeholder="Enter Your Phone Number" />
+            </div>
+
+            <div class="mb-3">
+              <label class="fw-semibold">Do you want to add another authorized representative? <span
+                  class="text-muted">(optional)</span></label>
+              <p><small>We may contact this authorized representative if the first one doesn't respond.</small></p>
+              <div class="d-flex gap-3 mt-2">
+                <div class="form-check rdo">
+                  <input class="form-check-input" type="radio" name="addRepresentative" id="addYes" value="yes">
+                  <label class="form-check-label" for="addYes">Yes</label>
+                </div>
+
+                <div class="form-check rdo">
+                  <input class="form-check-input" type="radio" name="addRepresentative" id="addNo" value="no" checked>
+                  <label class="form-check-label" for="addNo">No</label>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+        <div class="d-flex justify-content-between mt-4">
+          <button type="button" class="btn btn-secondary btn-prev"><i
+              class="fa-solid fa-arrow-left"></i>Previous</button>
+          <button type="button" class="btn btn-primary btn-next"><i class="fa-solid fa-arrow-right"></i>Next</button>
         </div>
       </div>
     </form>
