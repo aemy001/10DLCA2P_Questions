@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Full Modal With Steps</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+    .stepper {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 30px;
+      border-bottom: 1px solid #dee2e6;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+    }
+
+    /* Chrome, Edge, Safari */
+    .stepper::-webkit-scrollbar {
+      height: 0;
+    }
+
+    .stepper::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .stepper::-webkit-scrollbar-thumb {
+      background: rgb(175, 174, 175);
+      border-radius: 10px;
+    }
+
+    /* Hide scrollbar arrows (start/end buttons) */
+    .stepper::-webkit-scrollbar-button {
+      display: none;
+      width: 0;
+      height: 0;
+    }
+
+    .stepper::-webkit-scrollbar-thumb:hover {
+      background: rgb(145, 144, 145);
+    }
+
+
+
+    .stepper .step {
+      padding: 10px 25px;
+      cursor: pointer;
+      position: relative;
+      font-weight: 500;
+      color: #6c757d;
+      transition: color 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    .step.active {
+      color: rgb(168, 108, 168);
+      border-bottom: 3px solid rgb(168, 108, 168);
+    }
+
+    .color-main {
+      color: rgb(168, 108, 168);
+    }
+
+    .step i {
+      font-size: 16px;
+    }
+
+    .step-content {
+      padding: 16px;
+      /* padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1); */
+    }
+
+    textarea {
+      resize: none;
+    }
+
+    .btn-next,
+    .btn-prev {
+      min-width: 120px;
+      text-transform: uppercase;
+    }
+
+    .btn-next {
+      background-color: rgb(168, 108, 168);
+      border-color: rgb(168, 108, 168);
+    }
+
+    .btn-next:hover {
+      background-color: rgb(168, 108, 168);
+      border-color: rgb(168, 108, 168);
+    }
+
+    .btn-next:focus {
+      background-color: rgb(168, 108, 168);
+      border-color: rgb(168, 108, 168);
+    }
+
+    .btn-next,
+    .btn-next:hover,
+    .btn-next:focus,
+    .btn-next.active,
+    .btn-next.show,
+    .btn-check:checked+.btn-next,
+    .btn-next:active {
+      background-color: rgb(168, 108, 168) !important;
+      border-color: rgb(168, 108, 168) !important;
+      color: white;
+    }
+
+    .btn-prev {
+      color: rgb(168, 108, 168);
+      border: 2px solid rgb(168, 108, 168);
+      background: transparent !important;
+    }
+
+    .btn-prev:hover {
+      color: white !important;
+      border: 2px solid rgb(168, 108, 168) !important;
+      background: rgb(168, 108, 168) !important;
+    }
+
+
+
+    .btn-prev,
+    .btn-prev:focus,
+    .btn-prev.active,
+    .btn-prev.show,
+    .btn-check:checked+.btn-prev,
+    .btn-prev:active {
+      color: rgb(168, 108, 168) !important;
+      border: 2px solid rgb(168, 108, 168) !important;
+    }
+
+
+    .btn i {
+      margin-right: 6px;
+    }
+
+    .bg-gray {
+      background-color: #f3f4f5;
+      font-weight: 600;
+    }
+
+    .suggestionBtn {
+      background-color: rgb(82, 133, 82);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: 12px;
+    }
+
+
+    .border-bottom {
+      border-bottom: 2px solid black;
+      padding-bottom: 10px;
+    }
+
+    .astrk {
+      font-size: 18px;
+    }
+
+    .mainBtnOutline {
+      color: rgb(168, 108, 168);
+      border: 2px solid rgb(168, 108, 168);
+      padding: 6px 16px;
+      background: transparent;
+      font-weight: 600;
+      border-radius: 6px;
+      text-transform: uppercase;
+      font-size: 12px !important;
+    }
+
+    .mainBtnOutline:hover {
+      border: 2px solid rgb(168, 108, 168);
+      background: rgb(168, 108, 168);
+      color: white;
+    }
+
+    .exitBtnOutline {
+      color: red;
+      border: 2px solid red;
+      padding: 6px 16px;
+      font-weight: 600;
+      background: transparent;
+      border-radius: 6px;
+      text-transform: uppercase;
+      font-size: 12px !important;
+
+    }
+
+    .exitBtnOutline:hover {
+      border: 2px solid red;
+      background: red;
+      color: white;
+    }
+
+    .previewBtn {
+      text-transform: uppercase;
+      background-color: darkblue;
+      border-color: darkblue;
+      font-size: 14px;
+      color: white;
+      padding: 8px 12px;
+      white-space: nowrap;
+    }
+
+    .previewBtn:hover {
+      background-color: darkblue;
+      border-color: darkblue;
+      color: white;
+    }
+
+    input,
+    textarea,
+    select {
+      font-size: 14px !important;
+    }
+
+    .form-check-input:checked {
+      background-color: darkblue !important;
+      border-color: darkblue !important;
+    }
+
+    .form-select:focus {
+      border-color: darkblue !important;
+      outline: 0 !important;
+      box-shadow: 0 0 0 .25rem rgba(13, 110, 253, .25) !important;
+    }
+
+    input:focus {
+      border-color: darkblue !important;
+      outline: 0 !important;
+      box-shadow: 0 0 0 .25rem rgba(13, 110, 253, .25) !important;
+    }
+
+    textarea:focus {
+      border-color: darkblue !important;
+      outline: 0 !important;
+      box-shadow: 0 0 0 .25rem rgba(13, 110, 253, .25) !important;
+    }
+
+    .rdo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .termsheading {
+      font-size: 18px;
+    }
+
+    .popover {
+      max-width: 400px;
+      /* keep it readable */
+      font-size: 0.875rem;
+    }
+
+    .popover-header {
+      color: #000;
+      font-weight: 600;
+      background-color: rgba(186, 255, 255, 0.438);
+    }
+
+    .popover-body {
+      color: #495057;
+      background-color: rgba(186, 255, 255, 0.438);
+    }
+     /* Chrome, Edge, Safari */
+    .step-content::-webkit-scrollbar {
+      width: 0;
+    }
+
+    .step-content::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .step-content::-webkit-scrollbar-thumb {
+      background: rgb(175, 174, 175);
+      border-radius: 10px;
+    }
+
+    /* Hide scrollbar arrows (start/end buttons) */
+    .step-content::-webkit-scrollbar-button {
+      display: none;
+      width: 0;
+      height: 0;
+    }
+
+    .step-content::-webkit-scrollbar-thumb:hover {
+      background: rgb(145, 144, 145);
+    }
+    .modalDialog.modal-full-width {
+        border-radius: 6px;
+      max-width: 90vw;
+      width: 90vw;
+      margin: 0 auto;
+    }
+
+    .modalContentForm {
+   border-radius: 6px;
+      height: 100%;
+    }
+
+    .step-content {
+      max-height: 70vh !important;
+      height: 65vh !important;
+      overflow-y: auto !important;
+    }
+    
+  </style>
+</head>
+
+<body class="bg-light p-5">
+
+  <!-- Trigger -->
+  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registrationModal">
+    Open Modal
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="registrationModal" tabindex="-1">
+    <div class="modal-dialog modalDialog modal-dialog-centered modal-full-width">
+      <div class="modal-content modalContentForm">
+
+        <!-- Header -->
+        <div class="modal-header px-4 py-3">
+            <h3 class="text-center  fw-bold">10DLC/A2P Registration Form</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <!-- Body -->
+        <div class="modal-body ModalBodyForm px-4 py-2" >
+<div class="container-fluid stepperForm">
+  
+
+    <!-- Form Wrapper -->
+    <form id="registrationForm" action="#" method="post">
+
+      <!-- Stepper Navigation -->
+      <div class="stepper mb-4">
+        <div class="step active" data-step="1">1. Campaign Details</div>
+        <div class="step" data-step="2">2. Sample Messages</div>
+        <div class="step" data-step="3">3. End-User Consent</div>
+        <div class="step" data-step="4">4. General Information</div>
+        <div class="step" data-step="5"> 5. Business Information</div>
+        <div class="step" data-step="6"> 6. Point Of Contact</div>
+        <div class="step" data-step="7"> 7. Terms & Privacy Policy</div>
+      </div>
+
+      <!-- Step 1 -->
+      <div id="step-1" class="step-content">
+        <h5 class="fw-semibold  border-bottom"> A2P/10DLC Registration
+          - Campaign Details</h5>
+        <!-- <div class="text-danger bg-gray p-2 mt-3"><i class="fa-solid fa-triangle-exclamation"></i> This campaign was
+          rejected
+          upon review</div> -->
+
+        <div class="mt-2"><strong>Read before answering questions:</strong>
+          <p>Before the phone companies are willing to approve your
+            messaging campaigns they need to review some examples of the types of messages you intend to send. Complete
+            the info below.</p>
+        </div>
+
+        <div class="row">
+          <div class="col-md-9">
+            <!-- Brand and Campaign Details Section -->
+            <div class="mb-4 border rounded p-3 bg-light">
+              <label class="fw-semibold mb-2">Brand and Campaign Details</label>
+              <p class="mb-3"><small>The fees associated with registration are displayed below.</small></p>
+
+              <div class="row g-3">
+                <!-- Low Volume Brand Registration -->
+                <div class="col-md-6">
+                  <div class="border rounded p-3 bg-white h-100">
+                    <h6 class="fw-bold mb-2">Low Volume Brand Registration</h6>
+                    <p class="mb-1 fs-5 fw-semibold">$4.00 <small>- One Time</small></p>
+                    <ul class="list-unstyled mt-2 mb-0">
+                      <li class="d-flex align-items-center mb-1">
+                        <i class="fa-solid fa-check text-success me-2"></i>
+                        <span>EIN required for registration</span>
+                      </li>
+                      <li class="d-flex align-items-center">
+                        <i class="fa-solid fa-check text-success me-2"></i>
+                        <span>More than 1 phone number allowed</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- Low Volume Campaign Registration -->
+                <div class="col-md-6">
+                  <div class="border rounded p-3 bg-white h-100">
+                    <h6 class="fw-bold mb-2">Low Volume Campaign Registration</h6>
+                    <p class="mb-1 fs-5 fw-semibold">$15.00 <small>- One Time</small></p>
+                    <ul class="list-unstyled mt-2 mb-0">
+                      <li class="d-flex align-items-center mb-1">
+                        <i class="fa-solid fa-check text-success me-2"></i>
+                        <span>Increased delivery rate</span>
+                      </li>
+                      <li class="d-flex align-items-center">
+                        <i class="fa-solid fa-check text-success me-2"></i>
+                        <span>Send up to 6,000 segments per day</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <p class="mt-3 mb-0">
+                <small class="text-muted">
+                  * These fees are paid directly to the phone companies and exist regardless of the texting platform you
+                  use.<br>
+                  * The phone companies also charge campaign fees up to $12/mo in accordance with TCR rules.
+                </small>
+              </p>
+            </div>
+            <div class="mb-3">
+              <div class="d-flex justify-content-between align-items-center">
+                <label class="form-label fw-semibold">Campaign Use Case <span class="text-danger astrk">*</span></label>
+                <a href="#" class="color-main">Learn More</a>
+
+              </div>
+              <select name="campaignUseCase" class="form-select" required>
+                <option selected>Sole Proprietor</option>
+                <option>Marketing</option>
+                <option>Customer Care</option>
+                <option>Notifications</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <div class="d-flex justify-content-between align-items-center">
+                <label class="form-label fw-semibold">Campaign Use Case Description <span
+                    class="text-danger astrk">*</span></label>
+                <!-- <button class="suggestionBtn mb-2" disabled>Suggestions</button> -->
+
+              </div>
+              <textarea
+                placeholder="We use this campaign to reach out to clients that have signed up on our website crownhomesre.com and have opted in to receive a call, text or email. We're reaching out regarding an inquiry of their home's value, only if opted in."
+                name="campaignDescription" class="form-control" rows="8" required></textarea>
+              <small class="text-muted">Min length: 40 characters. Max length: 4096 characters.</small>
+            </div>
+
+
+          </div>
+        </div>
+        <!-- <div class="d-flex justify-content-end">
+          <button type="button" class="btn btn-primary btn-next"><i class="fa-solid fa-arrow-right"></i>Next</button>
+        </div> -->
+      </div>
+
+      <!-- Step 2 -->
+      <div id="step-2" class="step-content d-none">
+        <div class="d-flex justify-content-between align-items-center border-bottom">
+          <h5 class="fw-semibold  "> A2P/10DLC Registration - Sample Messages</h5>
+          <div class="d-flex  gap-3 align-items-center">
+            <button type="button" class="btn btn-sm btn-outline-secondary"  data-bs-toggle="popover" data-bs-html="true"
+              data-bs-trigger="hover focus active" title="Notes:"
+              data-bs-content='To be in compliance with A2P/10DLC the first message you send a contact must include <strong>sender identification</strong> and <strong>opt-out language</strong>.<br><br>
+<strong>Sender identification</strong> identifies who you are and the name of your company. This will appear at the beginning of your message.<br><br>
+<strong>Opt-out language</strong> is text you add to the end of your message that tells contacts how to unsubscribe from further texts.<br><br>
+<strong>If this is missing your registration will get rejected! To ensure compliance we&#39;ll automatically add these required elements to the sample messages you provide.</strong><br><br>
+**If your messages include an embedded link or phone number be sure to check the appropriate boxes. DO NOT use link shorteners.'>
+              <i class="fa-solid fa-circle-info"></i> Notes
+            </button>
+
+            <!-- <button class="mainBtnOutline uppercase">Access Help Guide</button>
+            <button class="exitBtnOutline uppercase">Exit</button> -->
+          </div>
+        </div>
+        <!-- <div class="text-danger bg-gray p-2 mt-3"><i class="fa-solid fa-triangle-exclamation"></i> This campaign was
+          rejected
+          upon review</div> -->
+
+
+
+
+
+        <div class="mt-4"><strong>Read before answering questions:</strong>
+          <p>Before the phone companies are willing to approve your
+            messaging campaigns they need to review some examples of the types of messages you intend to send. Complete
+            the info below.</p>
+        </div>
+
+        <div class="row">
+          <div class="col-md-9">
+            <div class="mb-4">
+              <div class="d-flex justify-content-between align-items-center">
+                <label class="form-label fw-semibold">Sample message #1: (provide an example below)</label>
+                <!-- <button class="suggestionBtn" disabled>Suggestions</button> -->
+
+              </div>
+
+              <div class="mt-2">
+                <label class="form-label fw-semibold">Sender Identification (this section is pre-populated and will be
+                  added to the beginning of your message):<span class="text-danger astrk">*</span></label>
+                <input placeholder="Hi, This is Kirk from crown homes real estate" class="form-control" name="sample1"
+                  required />
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label fw-semibold">Add your sample message below: <span
+                  class="text-danger astrk">*</span></label>
+
+              <textarea
+                placeholder="We received your inquiry regarding the value of your home. When would be a good time for a quick call?"
+                name="sampleMessage" class="form-control" rows="8" required></textarea>
+              <small class="text-muted">Min length: 20 characters. Max length: 1024 characters.</small>
+            </div>
+            <div class="mb-4">
+              <label class="form-label fw-semibold">Opt-out Language (This section is pre-populated and will be added to
+                the end of your message) <span class="text-danger astrk">*</span></label>
+              <input placeholder="Reply stop to unsubscribe" class="form-control" name="sample1" required />
+            </div>
+            <div class="mb-3">
+              <div class="d-flex justify-content-between align-items-center">
+                <label class="form-label fw-semibold">Sample message #2: (provide an example below)</label>
+                <!-- <button class="suggestionBtn" disabled>Suggestions</button> -->
+
+              </div>
+
+              <div class="mt-2">
+                <label class="form-label fw-semibold">Sender Identification (this section is pre-populated and will be
+                  added to the beginning of your message):<span class="text-danger astrk">*</span></label>
+                <input placeholder="Hi, This is Kirk from crown homes real estate" class="form-control" name="sample1"
+                  required />
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label fw-semibold">Add your sample message below: <span
+                  class="text-danger astrk">*</span></label>
+
+              <textarea placeholder="I'm just texting to confirm for our appointment tomorrow. Does that still work?"
+                name="sampleMessage" class="form-control" rows="8" required></textarea>
+              <small class="text-muted">Min length: 20 characters. Max length: 1024 characters.</small>
+            </div>
+            <div class="mb-4">
+              <label class="form-label fw-semibold">Opt-out Language (This section is pre-populated and will be added to
+                the end of your message) <span class="text-danger astrk">*</span></label>
+              <input placeholder="Reply stop to unsubscribe" class="form-control" name="sample1" required />
+
+              <div class="d-flex justify-content-between align-items-start mt-4">
+                <div class="d-flex flex-column gap-2">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="includeLink">
+                    <label class="form-check-label" for="includeLink">
+                      The message will include an embedded link
+                    </label>
+                  </div>
+
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="includePhone">
+                    <label class="form-check-label" for="includePhone">
+                      The message will include phone numbers
+                    </label>
+                  </div>
+
+                  <small class="text-muted">
+                    <strong><em>*If there’s any chance your messages will include links or phone numbers, we recommend
+                        checking these boxes.</em></strong>
+                  </small>
+
+                </div>
+
+                <!-- <button type="button" class="btn  previewBtn">
+                  Preview Your Messages
+                </button> -->
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <!-- <div class="d-flex justify-content-end gap-3 align-items-center ">
+          <button type="button" class="btn btn-secondary btn-prev"><i class="fa-solid fa-arrow-left"></i>Back</button>
+          <button type="button" class="btn btn-primary btn-next"><i class="fa-solid fa-arrow-right"></i>Next</button>
+        </div> -->
+      </div>
+
+      <!-- Step 3 -->
+      <div id="step-3" class="step-content d-none">
+        <h5 class="fw-semibold border-bottom">A2P/10DLC Registration - End-User Consent</h5>
+
+        <!-- Rejected campaign message -->
+        <!-- <div class="text-danger bg-gray p-2 mt-3">
+          <i class="fa-solid fa-triangle-exclamation"></i> This campaign was rejected upon review
+        </div> -->
+
+        <!-- Read before answering -->
+        <div class="mt-3">
+          <strong>Read before answering questions:</strong>
+          <p>Before the phone companies are willing to approve your messaging campaigns they need to review some
+            examples of the types of messages you intend to send. Complete the info below.</p>
+        </div>
+
+        <!-- Did you know tooltip -->
+        <div class="mt-2 mb-3">
+          <span class="fw-semibold" data-bs-toggle="tooltip" data-bs-html="true"
+            title="Most campaigns that fail or are rejected are due to incorrect information being submitted in the 'How do end-users consent to receive messages?' section below.">
+            <i class="fa-solid fa-circle-info text-secondary"></i> Did you know?
+          </span>
+        </div>
+
+        <div class="row">
+          <div class="col-md-9">
+            <div class="mb-3">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <label class="form-label fw-semibold">How do end users consent to receive messages from you? <span
+                    class="text-danger astrk">*</span></label>
+                <!-- <button class="suggestionBtn" disabled>Suggestions</button> -->
+
+              </div>
+              <div class="bg-warning p-3 mb-2 rounded">
+                10DLC regulations require that all contacts opt-in to receive messages from your company. The phone
+                companies are looking to see the exact method you use to obtain this consent. The rules and the language
+                they are looking for are very specific. To make this easier we recommend using our pre-filled answer
+                below. We've also included a link to a pre-built, customized opt-in form for your business.
+                <strong>(Recommended - use our pre-filled answer)</strong>
+              </div>
+              <div class="text-danger fw-semibold  p-2 mb-3">
+                <i class="fa-solid fa-triangle-exclamation"></i> The campaign submission has been reviewed and rejected
+                due to issues verifying the Call to Action (CTA)
+                provided for the campaign. <a class="text-danger" href="#" target="_blank">Learn more <i
+                    class="fa-solid fa-arrow-up-right-from-square"></i></a>
+              </div>
+
+              <textarea
+                placeholder="Clients have to opt into our lead capture from on https://www.crownhomes.com/ and check a box to confirm receiving a call, text or email. They can easily unsubscribe by replying Stop or saying they want to unsubscribe. We will NOT contact them if they don’t check the box to receive call, text or email communications."
+                name="endUserConsent" class="form-control" rows="6" required></textarea>
+              <small class="text-muted">This field should describe how end users opt-in to the campaign, therefore
+                giving consent to the sender to receive their messages. If multiple opt-in methods are used for the same
+                campain, they must all be listed.</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="d-flex justify-content-end gap-3 align-items-center  ">
+          <button type="button" class="btn btn-secondary btn-prev"><i class="fa-solid fa-arrow-left"></i>Back</button>
+          <button type="button" class="btn btn-primary btn-next"><i class="fa-solid fa-arrow-right"></i>Next</button>
+        </div> -->
+      </div>
+
+      <!-- Step 4 -->
+      <div id="step-4" class="step-content d-none">
+        <h5 class="fw-semibold  border-bottom"> A2P/10DLC Registration
+          - General Information</h5>
+
+
+        <div class="mt-4"><strong>Read before answering questions:</strong>
+          <p>When completing this page please reference your official IRS documentation. (EIN documents, W2, W9, or
+            CP575). Answer the questions carefully to ensure the info you provide reviews and long delays in getting
+            your business registered.</p>
+        </div>
+
+        <div class="row">
+          <div class="col-md-9">
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Legal Business Name <span class="text-danger astrk">*</span></label>
+              <input class="form-control" name=""
+                placeholder="Enter your legal business name exactly as it appears on your IRS documents (ex: Joe Marketing Agency LLC rather than Joe Marketing Agency)" />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Street Address <span class="text-danger astrk">*</span></label>
+              <input class="form-control" name=""
+                placeholder="Enter your Business street address here. Must be a valid US address." />
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">City<span class="text-danger astrk">*</span></label>
+              <input class="form-control" name="" placeholder="Enter your City name." />
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">State <span class="text-danger astrk">*</span></label>
+              <input class="form-control" name="" placeholder="Enter your state name." />
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Postal/Zip Code <span class="text-danger astrk">*</span></label>
+              <input class="form-control" name="" placeholder="Enter your postal/zip code." />
+            </div>
+
+          </div>
+        </div>
+        <!-- <div class="d-flex justify-content-end gap-3 align-items-center  ">
+          <button type="button" class="btn btn-secondary btn-prev"><i class="fa-solid fa-arrow-left"></i>Back</button>
+          <button type="button" class="btn btn-primary btn-next"><i class="fa-solid fa-arrow-right"></i>Next</button>
+        </div> -->
+      </div>
+
+
+      <!-- Step 5 -->
+      <div id="step-5" class="step-content d-none">
+        <h5 class="fw-semibold  border-bottom"> A2P/10DLC Registration
+          - Business Information</h5>
+
+
+        <div class="mt-4"><strong>Read before answering questions:</strong>
+          <p>When completing this page please reference your official IRS documentation. (EIN documents, W2, W9, or
+            CP575). Answer the questions carefully to ensure the info you provide reviews and long delays in getting
+            your business registered.</p>
+        </div>
+
+        <div class="row">
+          <div class="col-md-9">
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Customer Business Profile Type<span
+                  class="text-danger astrk">*</span></label>
+              <select class="form-select" required name="">
+                <option value="Select Your customer business profile type">
+                  Select Your customer business profile type </option>
+                <option value="">Option 1</option>
+                <option value="">Option 2</option>
+              </select>
+            </div>
+
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Business Type<span class="text-danger astrk">*</span></label>
+              <select class="form-select" required name="">
+                <option value="Select an option (reference your IRS documents to confirm the correct option)">
+                  Select an option (reference your IRS documents to confirm the correct option)
+                </option>
+                <option value="">Option 1</option>
+                <option value="">Option 2</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Business Industry<span class="text-danger astrk">*</span></label>
+              <select class="form-select" required name="">
+                <option value="Select Your Industry">
+                  Select Your Industry </option>
+                <option value="">Option 1</option>
+                <option value="">Option 2</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Business Registration Number (EIN#) <span
+                  class="text-danger astrk">*</span></label>
+              <input class="form-control" name=""
+                placeholder="Enter your EIN Number (Must be a 9-digit number ex. 12-3456789. This can be found on W2, W9, or CP575)." />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Business Website (it must be your actual business domain) <span
+                  class="text-danger astrk">*</span></label>
+              <input class="form-control" name=""
+                placeholder="Add your Business website url here (ex. www.businesswebsite.com)." />
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Business Regions of Operations <span
+                  class="text-danger astrk">*</span></label>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="c1">
+                    <label class="form-check-label" for="includePhone">
+                      Africa
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="c1">
+                    <label class="form-check-label" for="c1">
+                      Latin America
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="c1">
+                    <label class="form-check-label" for="c1">
+                      Europe
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="c1">
+                    <label class="form-check-label" for="c1">
+                      Asia
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="c1">
+                    <label class="form-check-label" for="c1">
+                      USA and Canada
+                    </label>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+        <!-- <div class="d-flex justify-content-end gap-3 align-items-center  ">
+          <button type="button" class="btn btn-secondary btn-prev"><i class="fa-solid fa-arrow-left"></i>Back</button>
+          <button type="button" class="btn btn-primary btn-next"><i class="fa-solid fa-arrow-right"></i>Next</button>
+        </div> -->
+      </div>
+
+      <!-- Step 6 -->
+      <div id="step-6" class="step-content d-none">
+        <h5 class="fw-semibold  border-bottom"> A2P/10DLC Registration
+          - Point Of Contact</h5>
+
+
+        <div class="mt-4"><strong>Read before answering questions:</strong>
+          <p>Please complete the information below in case we need to contact you or an authorized representative
+            regarding your registration. We will only contact you if there are any issues.</p>
+        </div>
+
+        <div class="row">
+          <div class="col-md-9">
+            <div class="mb-3">
+              <label class="form-label fw-semibold">First Name <span class="text-danger astrk">*</span></label>
+              <input class="form-control" name="" placeholder="Enter your First Name" />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Last Name <span class="text-danger astrk">*</span></label>
+              <input class="form-control" name="" placeholder="Enter your Last Name" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Business Title <span class="text-danger astrk">*</span></label>
+              <input class="form-control" name="" placeholder="Enter your Business Title" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Job Position<span class="text-danger astrk">*</span></label>
+              <select class="form-select" required name="">
+                <option value="Select Your Job Position.">
+                  Select Your Job Position. </option>
+                <option value="">Option 1</option>
+                <option value="">Option 2</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">What is your Email Address? <span
+                  class="text-danger astrk">*</span></label>
+              <input class="form-control" name="" placeholder="Enter Your Email Address" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">What is your Phone Number? <span
+                  class="text-danger astrk">*</span></label>
+              <input class="form-control" name="" placeholder="Enter Your Phone Number" />
+            </div>
+
+            <div class="mb-3">
+              <label class="fw-semibold">Do you want to add another authorized representative? <span
+                  class="text-muted">(optional)</span></label>
+              <p><small>We may contact this authorized representative if the first one doesn't respond.</small></p>
+              <div class="d-flex gap-3 mt-2">
+                <div class="form-check rdo">
+                  <input class="form-check-input" type="radio" name="addRepresentative" id="addYes" value="yes">
+                  <label class="form-check-label" for="addYes">Yes</label>
+                </div>
+
+                <div class="form-check rdo">
+                  <input class="form-check-input" type="radio" name="addRepresentative" id="addNo" value="no" checked>
+                  <label class="form-check-label" for="addNo">No</label>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- modal questions -->
+            <div class="mb-3">
+              <label class="fw-semibold">Do you send text messages to contacts located in United States? <span
+                  class="text-danger astrk">*</span></label></label>
+              <p><small>If you are based in United States registration is mandatory. If you are located outside of the
+                  United States, but send messages to US numbers you are also required to register.</small></p>
+              <div class="d-flex gap-3 mt-2">
+                <div class="form-check rdo">
+                  <input class="form-check-input" type="radio" name="addRepresentative" id="addYes" value="yes">
+                  <label class="form-check-label" for="addYes">Yes</label>
+                </div>
+
+                <div class="form-check rdo">
+                  <input class="form-check-input" type="radio" name="addRepresentative" id="addNo" value="no" checked>
+                  <label class="form-check-label" for="addNo">No</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="fw-semibold">Does the business you're registering have a tax ID (EIN#)? <span
+                  class="text-danger astrk">*</span></label></label>
+              <p><small>* You can find your EIN number on your IRS forms or previous tax return documents (W2, W9, or
+                  CP575).</small></p>
+              <div class="d-flex gap-3 mt-2">
+                <div class="form-check rdo">
+                  <input class="form-check-input" type="radio" name="addRepresentative" id="addYes" value="yes">
+                  <label class="form-check-label" for="addYes">Yes</label>
+                </div>
+
+                <div class="form-check rdo">
+                  <input class="form-check-input" type="radio" name="addRepresentative" id="addNo" value="no" checked>
+                  <label class="form-check-label" for="addNo">No</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="fw-semibold">On average, do you plan to send more or less than 6,000 messages per day? <span
+                  class="text-danger astrk">*</span></label></label>
+              <div class="d-flex gap-3 mt-2">
+                <div class="form-check rdo">
+                  <input class="form-check-input" type="radio" name="addRepresentative" id="addYes" value="yes">
+                  <label class="form-check-label" for="addYes">More than 6,000/Day</label>
+                </div>
+
+                <div class="form-check rdo">
+                  <input class="form-check-input" type="radio" name="addRepresentative" id="addNo" value="no" checked>
+                  <label class="form-check-label" for="addNo">Less than 6,00/Day</label>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="mb-3">
+              <label class="fw-semibold">On average, do you plan to send more or less than 6,000 messages per day? <span
+                  class="text-danger astrk">*</span></label></label>
+              <div class="d-flex gap-3 mt-2">
+                <div class="form-check rdo">
+                  <input class="form-check-input" type="radio" name="addRepresentative" id="addYes" value="yes">
+                  <label class="form-check-label" for="addYes">More than 6,000/Day</label>
+                </div>
+
+                <div class="form-check rdo">
+                  <input class="form-check-input" type="radio" name="addRepresentative" id="addNo" value="no" checked>
+                  <label class="form-check-label" for="addNo">Less than 6,00/Day</label>
+                </div>
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+        <!-- <div class="d-flex justify-content-end gap-3 align-items-center  ">
+          <button type="button" class="btn btn-secondary btn-prev"><i class="fa-solid fa-arrow-left"></i>Back</button>
+          <button type="button" class="btn btn-primary btn-next"><i class="fa-solid fa-arrow-right"></i>Next</button>
+        </div> -->
+      </div>
+
+      <!-- Step 7 -->
+      <div id="step-7" class="step-content d-none">
+        <div class="d-flex justify-content-between align-items-center border-bottom">
+          <h5 class="fw-semibold "> A2P/10DLC Registration
+            - Terms & Privacy Policy</h5>
+          <!-- <div class="d-flex  gap-3 align-items-center">
+            <button class="mainBtnOutline uppercase">Access Help Guide</button>
+            <button class="exitBtnOutline uppercase">Exit</button>
+          </div> -->
+        </div>
+        <div class="mt-4">
+          <p class="fw-semibold termsheading "> Terms of Services & Privacy Policy</p>
+          <p>We will process data according to the <a href="#" class="text-decoration-none" target="_blank"
+              rel="noopener noreferrer">Twilio Privacy Statement</a></p>
+          <div class="form-check d-flex justify-content-center align-items-center gap-3">
+            <input class="form-check-input" type="checkbox" id="accept">
+            <label class="form-check-label" for="accept">
+              I declare that the information provided is accurate. I acknowledge that Twilio will be processing the
+              information provided for the purpose of identity verification, and that Twilio reserves the right to
+              retain Business Profile information after account closure in the case of a traceback from an authority or
+              equivalent.
+            </label>
+          </div>
+        </div>
+
+        <!-- <div class="d-flex justify-content-end gap-3 align-items-center  mt-4">
+          <button type="button" class="btn btn-secondary btn-prev"><i class="fa-solid fa-arrow-left"></i>Back</button>
+          <button type="button" class="btn btn-primary btn-next"> <i class="fa-solid fa-paper-plane me-2"></i>Submit
+            Information</button>
+        </div> -->
+      </div>
+    </form>
+  </div>
+
+        </div>
+
+        <!-- Footer -->
+     
+        <div class="modal-footer d-flex justify-content-end gap-3 align-items-center ">
+          <button type="button" class="btn btn-secondary btn-prev"><i class="fa-solid fa-arrow-left"></i>Back</button>
+             <button type="button" class="btn btn-primary btn-next"><i class="fa-solid fa-arrow-right"></i>Next</button>
+           <button type="button" class="btn btn-primary btn-next"> <i class="fa-solid fa-paper-plane me-2"></i>Submit
+            Information</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+const steps = document.querySelectorAll('.step');
+const contents = document.querySelectorAll('.step-content');
+const btnPrev = document.querySelector('.btn-prev');
+const btnNext = document.querySelectorAll('.btn-next')[0]; // assuming first btn-next is "Next"
+const btnSubmit = document.querySelectorAll('.btn-next')[1]; // second btn-next is "Submit"
+let currentStep = 1;
+
+function showStep(step) {
+  contents.forEach((content, index) => {
+    content.classList.toggle('d-none', index + 1 !== step);
+  });
+
+  steps.forEach((s, index) => {
+    s.classList.toggle('active', index + 1 === step);
+  });
+
+  // Show/hide buttons
+  btnPrev.style.display = step === 1 ? 'none' : 'inline-block';
+  btnNext.style.display = step === steps.length ? 'none' : 'inline-block';
+  btnSubmit.style.display = step === steps.length ? 'inline-block' : 'none';
+}
+
+// Next button click
+btnNext.addEventListener('click', () => {
+  if (currentStep < steps.length) {
+    currentStep++;
+    showStep(currentStep);
+  }
+});
+
+// Prev button click
+btnPrev.addEventListener('click', () => {
+  if (currentStep > 1) {
+    currentStep--;
+    showStep(currentStep);
+  }
+});
+
+// Click on step circles
+steps.forEach(step => {
+  step.addEventListener('click', () => {
+    currentStep = parseInt(step.dataset.step);
+    showStep(currentStep);
+  });
+});
+
+// Initialize first step
+showStep(currentStep);
+
+// Form submission
+document.getElementById('registrationForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  alert('Form submitted successfully!');
+});
+
+// Bootstrap Popovers & Tooltips
+const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
+popoverTriggerList.forEach(popoverTriggerEl => {
+  new bootstrap.Popover(popoverTriggerEl, {
+    placement: 'left',  
+    html: true,
+    trigger: 'hover focus'
+  });
+});
+
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+const tooltipList = [...tooltipTriggerList].map(el => new bootstrap.Tooltip(el));
+</script>
+
+
+
+</body>
+
+</html>
